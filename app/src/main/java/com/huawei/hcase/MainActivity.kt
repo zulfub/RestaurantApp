@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -121,7 +122,7 @@ fun MainMenu(navController: NavController, viewModel: DishesView = viewModel()) 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Dishes") },
+                title = { Text(text = "Menu") },
                 //actions margin to right side
                 actions = {
                     Icon(
@@ -219,11 +220,20 @@ fun MainMenu(navController: NavController, viewModel: DishesView = viewModel()) 
                                     painter = painterResource(id = if (dish.dish_favorite) R.drawable.favorited else R.drawable.unfavorited),
                                     contentDescription = "",
                                     modifier = Modifier
-                                        .size(20.dp)
+                                        .size(30.dp)
                                         .clickable {
                                             viewModel.toggleFavorite(dish.dish_id)
                                         }
                                 )
+                                Button(
+                                    onClick = {
+                                        //Ordering Method called
+                                        //orderFood(dish0)
+                                    },
+                                    modifier = Modifier.padding(8.dp)
+                                ) {
+                                    Text(text = "Order")
+                                }
                             }
                         }
                     }
