@@ -1,4 +1,4 @@
-package com.huawei.hcase
+package com.huawei.hcase.entity
 
 data class Dishes(
     var dish_id: Int,

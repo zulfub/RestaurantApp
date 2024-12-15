@@ -23,11 +23,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,21 +37,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHost
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.huawei.hcase.ui.theme.HcaseTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.huawei.hcase.viewmodel.DishesView
 
 //var favorite: Int = R.drawable.unfavorited
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
+        //Navigation between pages
         setContent {
             HcaseTheme {
                 AppNavigation()
@@ -68,12 +63,12 @@ fun AppNavigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "MainMenu") {
         composable("MainMenu") {
-            MainMenu(navController = navController, viewModel = viewModel())
+            MainMenu(navController = navController)
         }
         composable("Favorites")
         {
             //Favorites(dishesList)
-            Favorites(navController = navController, viewModel = viewModel())
+            Favorites(navController = navController)
         }
     }
 }
@@ -81,43 +76,11 @@ fun AppNavigation() {
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainMenu(navController: NavController, viewModel: DishesView = viewModel()) {
-    //Taking dish list from view Dish list
+fun MainMenu(navController: NavController) {
+    //Creating DishesViewModel
+    val viewModel: DishesView = viewModel()
+    //Taking dish list from viewModel Dish list
     val dishesList by viewModel.dishesList.collectAsState()
-    //App launched list should fill MainMenu page
-    /* LaunchedEffect(key1 = true) {
-         //later will take from db
-         val dish1 =
-             Dishes(
-                 1,
-                 "Pasta",
-                 "Italian pasta with tomato sauce and meatballs",
-                 "pasta_img",
-                 480,
-                 true
-             )
-         val dish2 = Dishes(
-             2,
-             "Salad",
-             "Fresh and organic picked vegetables with tomatoes ",
-             "salad_img",
-             350,
-             false
-         )
-
-         val dish3 = Dishes(
-             3,
-             "Nachos",
-             "Traditional Mexican dish with mexican beans and beef",
-             "nachos_img",
-             450,
-             false
-         )
-
-         dishesList.add(dish1)
-         dishesList.add(dish2)
-         dishesList.add(dish3)
-     }*/
 
     Scaffold(
         topBar = {
