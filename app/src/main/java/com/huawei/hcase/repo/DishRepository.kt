@@ -1,9 +1,8 @@
 package com.huawei.hcase.repo
 
 import com.huawei.hcase.entity.Dishes
-import kotlinx.coroutines.flow.MutableStateFlow
 
-//DB operations
+//Featured DB operations
 class DishRepository {
     private val initialDishesList = listOf(
             Dishes(
