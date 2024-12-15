@@ -40,7 +40,7 @@ import com.huawei.hcase.viewmodel.DishesView
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Favorites(navController: NavController, viewModel: DishesView = viewModel()) {
-    //Getting list from viewModel
+    //Getting list from viewModel with loaded before do not load again
     val dishesList by viewModel.dishesList.collectAsState()
     //Filter the favorite dishes which are favorite
     val favoriteDishesList = dishesList.filter { it.dish_favorite }
@@ -106,7 +106,7 @@ fun Favorites(navController: NavController, viewModel: DishesView = viewModel())
                                             )
                                         ),
                                         contentDescription = "Product Details",
-                                        modifier = Modifier.size(70.dp)
+                                        modifier = Modifier.size(120.dp)
                                     )
                                     Row(
                                         verticalAlignment = Alignment.CenterVertically,

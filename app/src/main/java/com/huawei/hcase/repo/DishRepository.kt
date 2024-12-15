@@ -11,7 +11,7 @@ class DishRepository {
                 "Pasta",
                 "Italian pasta with tomato sauce and meatballs",
                 "pasta_img",
-                480,
+                80,
                 true
             ),
             Dishes(
@@ -19,7 +19,7 @@ class DishRepository {
                 "Salad",
                 "Fresh and organic picked vegetables with tomatoes",
                 "salad_img",
-                350,
+                60,
                 false
             ),
             Dishes(
@@ -27,9 +27,17 @@ class DishRepository {
                 "Nachos",
                 "Traditional Mexican dish with beans and beef",
                 "nachos_img",
-                450,
+                150,
                 true
-            )
+            ),
+            Dishes(
+            4,
+            "SteakHouse",
+            "Medium Rare Kobe Beef with vegatables on side",
+            "steak_img",
+            1000,
+            true
+        )
         )
 
     // Returns the initial dishes

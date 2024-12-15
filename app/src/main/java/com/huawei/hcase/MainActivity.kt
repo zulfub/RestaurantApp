@@ -61,14 +61,16 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
+    //creating viewModel for initial load
+    val viewModel: DishesView = viewModel()
     NavHost(navController = navController, startDestination = "MainMenu") {
         composable("MainMenu") {
-            MainMenu(navController = navController)
+            MainMenu(navController = navController , viewModel)
         }
         composable("Favorites")
         {
             //Favorites(dishesList)
-            Favorites(navController = navController)
+            Favorites(navController = navController ,viewModel )
         }
     }
 }
@@ -76,10 +78,8 @@ fun AppNavigation() {
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainMenu(navController: NavController) {
-    //Creating DishesViewModel
-    val viewModel: DishesView = viewModel()
-    //Taking dish list from viewModel Dish list
+fun MainMenu(navController: NavController,viewModel: DishesView = viewModel()) {
+    //Getting list from viewModel with loaded before do not load again
     val dishesList by viewModel.dishesList.collectAsState()
 
     Scaffold(
@@ -143,7 +143,7 @@ fun MainMenu(navController: NavController) {
                                             )
                                         ),
                                         contentDescription = "Product Details",
-                                        modifier = Modifier.size(70.dp)
+                                        modifier = Modifier.size(120.dp)
                                     )
                                     Row(
                                         verticalAlignment = Alignment.CenterVertically,
