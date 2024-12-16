@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -86,55 +87,49 @@ fun Favorites(navController: NavController, viewModel: DishesView = viewModel())
                                 .padding(all = 5.dp)
                                 .fillMaxWidth()
                         ) {
-                            //Row created for better click performance on Card
-                            Row {
-                                //Column Centered , and width fixed
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
-                                        .padding(all = 10.dp)
-                                        .fillMaxWidth()
+                            //Column Centered , and width fixed
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .padding(all = 10.dp)
+                                    .fillMaxWidth()
+                            ) {
+                                //Taking img from res
+                                val activity = (LocalContext.current as Activity)
+                                Image(
+                                    bitmap = ImageBitmap.imageResource(
+                                        id = activity.resources.getIdentifier(
+                                            favoriteDish.dish_img,
+                                            "drawable",
+                                            activity.packageName
+                                        )
+                                    ),
+                                    contentDescription = "Product Details",
+                                    modifier = Modifier.size(120.dp)
+                                )
+                                Column(
+                                    verticalArrangement = Arrangement.SpaceEvenly,
+                                    modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    //Taking img from res
-                                    val activity = (LocalContext.current as Activity)
-                                    Image(
-                                        bitmap = ImageBitmap.imageResource(
-                                            id = activity.resources.getIdentifier(
-                                                favoriteDish.dish_img,
-                                                "drawable",
-                                                activity.packageName
-                                            )
-                                        ),
-                                        contentDescription = "Product Details",
-                                        modifier = Modifier.size(120.dp)
-                                    )
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        Column(
-                                            verticalArrangement = Arrangement.SpaceEvenly,
-                                            modifier = Modifier.fillMaxWidth()
-                                        ) {
-                                            Column {
-                                                Text(
-                                                    text = favoriteDish.dish_name,
-                                                    fontSize = 20.sp,
-                                                    color = Color.DarkGray
-                                                )
-                                                Text(
-                                                    text = favoriteDish.dish_desc,
-                                                    fontSize = 14.sp,
-                                                    color = Color.Gray
-                                                )
-                                                Text(
-                                                    text = "${favoriteDish.dish_price} $",
-                                                    color = Color.Black
-                                                )
-                                            }
-                                        }
+                                    Column {
+                                        Text(
+                                            text = favoriteDish.dish_name,
+                                            fontSize = 20.sp,
+                                            color = Color.DarkGray
+                                        )
+                                        Text(
+                                            text = favoriteDish.dish_desc,
+                                            fontSize = 14.sp,
+                                            color = Color.Gray
+                                        )
+                                        Text(
+                                            text = "${favoriteDish.dish_price} $",
+                                            color = Color.Black
+                                        )
                                     }
                                 }
+
+
                             }
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
@@ -156,7 +151,10 @@ fun Favorites(navController: NavController, viewModel: DishesView = viewModel())
                                         //Ordering Method called
                                         //orderFood(dish0)
                                     },
-                                    modifier = Modifier.padding(8.dp)
+                                    modifier = Modifier.padding(8.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = Color.DarkGray
+                                    )
                                 ) {
                                     Text(text = "Order")
                                 }
