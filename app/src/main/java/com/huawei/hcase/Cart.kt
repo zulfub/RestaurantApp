@@ -146,18 +146,6 @@ fun Cart(navController: NavController, viewModel: DishesView = viewModel()) {
                                             viewModel.toggleOrder(orderedDish.dish_id)
                                         }
                                 )
-                                Button(
-                                    onClick = {
-                                        //Ordering Method called
-                                        //orderFood(dish0)
-                                    },
-                                    modifier = Modifier.padding(8.dp),
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = Color.DarkGray
-                                    )
-                                ) {
-                                    Text(text = "Order")
-                                }
                             }
                         }
                     }

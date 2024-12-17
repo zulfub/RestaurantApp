@@ -198,19 +198,32 @@ fun MainMenu(navController: NavController, viewModel: DishesView = viewModel()) 
                                             viewModel.toggleFavorite(dish.dish_id)
                                         }
                                 )
-                                Button(
-                                    onClick = {
-                                        //Ordering Method called
-                                        viewModel.toggleOrder(dish.dish_id)
-                                    },
-                                    modifier = Modifier.padding(8.dp),
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = Color.DarkGray
-                                    )
+                                if (dish.dish_addedCard){
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.remove_cart),
+                                        contentDescription = "",
+                                        modifier = Modifier
+                                            .size(30.dp)
+                                            .clickable {
+                                                viewModel.toggleOrder(dish.dish_id)
+                                            }
+                                    )}
+                                    else {
+                                    Button(
+                                        onClick = {
+                                            //Ordering Method called
+                                            viewModel.toggleOrder(dish.dish_id)
+                                        },
+                                        modifier = Modifier.padding(8.dp),
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = Color.DarkGray
+                                        )
 
-                                ) {
-                                    Text(text = "Order")
-                                }
+                                    ) {
+                                        Text(text = "Order")
+                                    }
+                                    }
+
                             }
                         }
                     }

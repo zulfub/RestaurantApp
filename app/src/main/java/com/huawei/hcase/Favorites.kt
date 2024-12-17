@@ -146,17 +146,30 @@ fun Favorites(navController: NavController, viewModel: DishesView = viewModel())
                                             viewModel.toggleFavorite(favoriteDish.dish_id)
                                         }
                                 )
-                                Button(
-                                    onClick = {
-                                        //Ordering Method called
-                                        //orderFood(dish0)
-                                    },
-                                    modifier = Modifier.padding(8.dp),
-                                    colors = ButtonDefaults.buttonColors(
-                                        containerColor = Color.DarkGray
+                                if (favoriteDish.dish_addedCard) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.remove_cart),
+                                        contentDescription = "",
+                                        modifier = Modifier
+                                            .size(30.dp)
+                                            .clickable {
+                                                viewModel.toggleOrder(favoriteDish.dish_id)
+                                            }
                                     )
-                                ) {
-                                    Text(text = "Order")
+                                } else {
+                                    Button(
+                                        onClick = {
+                                            //Ordering Method called
+                                            viewModel.toggleOrder(favoriteDish.dish_id)
+                                        },
+                                        modifier = Modifier.padding(8.dp),
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = Color.DarkGray
+                                        )
+
+                                    ) {
+                                        Text(text = "Order")
+                                    }
                                 }
                             }
                         }
